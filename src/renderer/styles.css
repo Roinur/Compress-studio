@@ -1,0 +1,688 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f4f4f5;
+  background: #0d0d0d;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-color: var(--scroll-thumb) transparent;
+  scrollbar-width: thin;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.appShell {
+  --bg: #0d0d0d;
+  --panel: #151515;
+  --panel-strong: #1a1a1a;
+  --field: #101010;
+  --line: #2d2d2d;
+  --line-soft: #242424;
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --muted-2: #7e7e87;
+  --accent: #8aa4ad;
+  --accent-strong: #a8bec5;
+  --accent-soft: rgba(138, 164, 173, 0.18);
+  --good: #86d19b;
+  --warn: #d8b273;
+  --danger: #ff907f;
+  --scroll-thumb: rgba(150, 150, 158, 0.5);
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  grid-template-rows: 48px minmax(0, 1fr);
+  color: var(--text);
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.appShell[data-theme="light"] {
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --panel-strong: #f7f7f8;
+  --field: #ffffff;
+  --line: #d7d7dc;
+  --line-soft: #e5e5e8;
+  --text: #101014;
+  --muted: #52525b;
+  --muted-2: #71717a;
+  --accent: #61747b;
+  --accent-strong: #415158;
+  --accent-soft: rgba(97, 116, 123, 0.13);
+  --good: #287d47;
+  --warn: #8f651f;
+  --danger: #b84b3b;
+  --scroll-thumb: rgba(95, 95, 105, 0.36);
+}
+
+.appTitlebar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 0 0 20px;
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--bg);
+  -webkit-app-region: drag;
+}
+
+.appMark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 82%, var(--line));
+  border-radius: 8px;
+  color: var(--accent-strong);
+  background: var(--panel);
+}
+
+.appTitlebar strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.themeButton {
+  margin-left: auto;
+}
+
+.windowControls {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  margin-left: 8px;
+  -webkit-app-region: no-drag;
+}
+
+.windowControls button {
+  width: 48px;
+  min-height: 0;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  color: var(--muted);
+  background: transparent;
+}
+
+.windowControls .closeButton:hover:not(:disabled) {
+  color: #ffffff;
+  background: #c23b32;
+}
+
+button {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 13px;
+  color: var(--text);
+  background: var(--panel-strong);
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+
+button:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 52%, var(--line));
+  background: color-mix(in srgb, var(--panel-strong) 76%, var(--accent-soft));
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+input {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--field);
+  padding: 0 12px;
+  -webkit-app-region: no-drag;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+code,
+pre {
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+}
+
+.sidebar {
+  min-height: 0;
+  border-right: 1px solid var(--line-soft);
+  padding: 24px;
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  gap: 16px;
+  background: var(--bg);
+  overflow: auto;
+}
+
+.dropZone {
+  min-height: 154px;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 20px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 54%, var(--line));
+  background: color-mix(in srgb, var(--panel-strong) 84%, var(--accent-soft));
+  text-align: center;
+}
+
+.dropZone strong,
+.dropZone span {
+  display: block;
+}
+
+.dropZone span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.dropZone.dragging {
+  border-color: var(--accent-strong);
+  background: color-mix(in srgb, var(--panel-strong) 68%, var(--accent-soft));
+}
+
+.sideSection {
+  display: grid;
+  gap: 10px;
+}
+
+.sideSectionTitle {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.advancedTitle {
+  margin-top: 6px;
+}
+
+.pathLine {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  background: var(--field);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pathLine.missing {
+  color: var(--danger);
+}
+
+.settingsPanel {
+  align-content: start;
+}
+
+.settingsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.toggleRow {
+  min-height: 44px;
+  grid-template-columns: minmax(0, 1fr) 42px;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--panel-strong);
+}
+
+.toggleRow input {
+  width: 38px;
+  min-height: 22px;
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  background: #6b7280;
+  padding: 2px;
+  justify-self: end;
+}
+
+.toggleRow input::before {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 0.16s ease;
+}
+
+.toggleRow input:checked {
+  background: var(--accent);
+}
+
+.toggleRow input:checked::before {
+  transform: translateX(16px);
+}
+
+.workspace {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) 38px;
+  overflow: hidden;
+}
+
+.topbar {
+  min-height: 96px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.topbarTitleGroup {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.topbarTitleText {
+  min-width: 0;
+}
+
+.topbar h1 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.topbar p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.compressButton {
+  min-width: 148px;
+  min-height: 46px;
+  border-width: 1px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.compressButton.ready {
+  color: #07140b;
+  border-color: color-mix(in srgb, var(--good) 72%, var(--line));
+  background: color-mix(in srgb, var(--good) 88%, #ffffff);
+}
+
+.compressButton.ready:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--good) 78%, #ffffff);
+}
+
+.compressButton.running,
+.compressButton.running:disabled {
+  color: #ffffff;
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--danger) 76%, var(--line));
+  background: color-mix(in srgb, var(--danger) 78%, #7b1e17);
+}
+
+.compressButton.empty,
+.compressButton.empty:disabled {
+  color: #1c1304;
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--warn) 72%, var(--line));
+  background: color-mix(in srgb, var(--warn) 82%, #ffffff);
+}
+
+.topActions {
+  display: flex;
+  gap: 10px;
+}
+
+.notice {
+  margin: 0 32px 18px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--good) 30%, var(--line));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--good) 10%, var(--panel));
+}
+
+.contentGrid {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  padding: 0 32px 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: 20px;
+  overflow: hidden;
+}
+
+.panel {
+  min-width: 0;
+  min-height: 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.panel h2 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.summaryProgress {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.queuePanel,
+.detailPanel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.jobList,
+.logList {
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+.jobItem {
+  width: 100%;
+  min-height: 82px;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+}
+
+.jobItem.selected {
+  border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
+  background: color-mix(in srgb, var(--panel-strong) 80%, var(--accent-soft));
+}
+
+.jobMain {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.jobThumb {
+  width: 72px;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  background: var(--field);
+  overflow: hidden;
+}
+
+.jobThumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.jobMain strong,
+.jobMain span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jobMain span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.jobMeta {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.jobMeta.completed {
+  color: var(--good);
+}
+
+.jobMeta.failed {
+  color: var(--danger);
+}
+
+.progressTrack {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--field);
+  overflow: hidden;
+}
+
+.progressTrack i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent-strong);
+  transition: width 0.2s ease;
+}
+
+.progressTrack.indeterminate i {
+  width: 34% !important;
+  animation: slide 1.1s ease-in-out infinite;
+}
+
+@keyframes slide {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(300%); }
+}
+
+.detailPanel {
+  grid-template-rows: auto auto auto auto minmax(0, 1fr);
+  gap: 14px;
+}
+
+.detailStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.detailStats div {
+  min-height: 64px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-strong);
+}
+
+.detailStats span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.detailStats strong {
+  font-size: 16px;
+}
+
+.commandBox {
+  min-height: 86px;
+  max-height: 120px;
+  margin: 0;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: color-mix(in srgb, var(--good) 86%, var(--text));
+  background: var(--field);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow: auto;
+  font-size: 12px;
+}
+
+.pathActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.logList {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--field);
+  font-size: 12px;
+}
+
+.logList span {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.logList em {
+  margin-right: 8px;
+  color: var(--muted-2);
+  font-style: normal;
+}
+
+.logList .stderr {
+  color: var(--danger);
+}
+
+.logList .system {
+  color: var(--accent-strong);
+}
+
+.emptyState {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 6px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.emptyState strong {
+  color: var(--text);
+}
+
+.emptyState.compact {
+  min-height: 160px;
+}
+
+.statusBar {
+  height: 38px;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 24px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--muted);
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.statusBar span {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statusDot {
+  width: 9px;
+  height: 9px;
+  min-width: 9px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: var(--good);
+}
+
+@media (max-width: 1120px) {
+  .appShell {
+    grid-template-columns: 1fr;
+    grid-template-rows: 48px auto minmax(0, 1fr);
+  }
+
+  .sidebar {
+    grid-row: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-right: 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .dropZone {
+    min-height: 120px;
+  }
+
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+}
