@@ -84,9 +84,9 @@ function createDemoBridge(): BridgeApi {
         platform: 'win32',
         packaged: false,
         appVersion: 'browser-preview',
-        executablePath: settings.executablePath || 'vendor\\console.main.exe',
+        executablePath: settings.executablePath || 'node_modules\\ffmpeg-static\\ffmpeg.exe',
         executableAvailable: true,
-        ffmpegPath: 'vendor\\ffmpeg.exe',
+        ffmpegPath: 'node_modules\\ffmpeg-static\\ffmpeg.exe',
         ffmpegAvailable: true,
         outputDir: settings.outputDir,
         nvidiaAvailable: true

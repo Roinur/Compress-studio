@@ -24,19 +24,10 @@
     "files": [
       "dist/**/*",
       "assets/**/*",
+      "node_modules/ffmpeg-static/**/*",
       "package.json"
     ],
     "asar": false,
-    "extraResources": [
-      {
-        "from": "vendor",
-        "to": "vendor",
-        "filter": [
-          "console.main.exe",
-          "ffmpeg.exe"
-        ]
-      }
-    ],
     "win": {
       "icon": "assets/icon.ico",
       "requestedExecutionLevel": "asInvoker",
@@ -46,6 +37,7 @@
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.1",
     "electron-store": "^10.1.0",
+    "ffmpeg-static": "^5.2.0",
     "lucide-react": "^0.561.0",
     "nanoid": "^5.1.6",
     "vite": "^7.2.7",

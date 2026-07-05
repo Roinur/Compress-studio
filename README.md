@@ -21,7 +21,7 @@ Compress Studio is a Windows-first desktop app for batch video compression. It k
 - Nvidia preference with automatic hardware encoder detection.
 - Optional desired final size target with max attempts.
 - Parallel job control and reveal-on-done support.
-- Bundled `ffmpeg.exe` so the app can run without a system FFmpeg install.
+- FFmpeg is provided by the `ffmpeg-static` npm dependency, so source builds do not need a system FFmpeg install.
 
 ## Development
 
@@ -39,12 +39,16 @@ npm run package
 
 The Windows installer is written to `release/`.
 
-## Required Vendor Files
+## FFmpeg
 
-The packaged app expects these files in `vendor/`:
+FFmpeg is installed by npm through [`ffmpeg-static`](https://www.npmjs.com/package/ffmpeg-static). A normal source build is:
 
-- `ffmpeg.exe`
-- `console.main.exe`
+```powershell
+npm install
+npm run package
+```
+
+The generated installer includes the FFmpeg binary from `node_modules/ffmpeg-static/`.
 
 ## Credits
 

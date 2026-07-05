@@ -18,13 +18,19 @@ function iconPath() {
 }
 
 function bundledCompressorPath() {
-  const base = app.isPackaged ? process.resourcesPath : app.getAppPath();
-  return path.join(base, 'vendor', 'console.main.exe');
+  return bundledFfmpegPath();
 }
 
 function bundledFfmpegPath() {
+  const executable = process.platform === 'win32' ? 'ffmpeg.exe' : 'ffmpeg';
+  const npmPath = path.join(app.getAppPath(), 'node_modules', 'ffmpeg-static', executable);
+  if (fs.existsSync(npmPath)) return npmPath;
+
   const base = app.isPackaged ? process.resourcesPath : app.getAppPath();
-  return path.join(base, 'vendor', 'ffmpeg.exe');
+  const legacyVendorPath = path.join(base, 'vendor', executable);
+  if (fs.existsSync(legacyVendorPath)) return legacyVendorPath;
+
+  return executable;
 }
 
 function resolveCompressorPath(settings = getSettings()) {
@@ -500,9 +506,9 @@ app.whenReady().then(() => {
       packaged: app.isPackaged,
       appVersion: app.getVersion(),
       executablePath,
-      executableAvailable: fs.existsSync(executablePath),
+      executableAvailable: fs.existsSync(executablePath) || executablePath === 'ffmpeg' || executablePath === 'ffmpeg.exe',
       ffmpegPath,
-      ffmpegAvailable: fs.existsSync(ffmpegPath),
+      ffmpegAvailable: fs.existsSync(ffmpegPath) || ffmpegPath === 'ffmpeg' || ffmpegPath === 'ffmpeg.exe',
       outputDir: settings.outputDir,
       nvidiaAvailable: hasNvidiaGpu()
     };
