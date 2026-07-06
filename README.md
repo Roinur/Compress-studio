@@ -66,10 +66,18 @@ npm run package
 
 The generated installer includes the FFmpeg binary from `node_modules/ffmpeg-static/`.
 
+Compress Studio uses FFmpeg as a separate executable for video encoding, thumbnail extraction, and metadata probing. The Windows build currently bundled by `ffmpeg-static` is GPL v3 and includes its own `ffmpeg.exe.LICENSE` and `ffmpeg.exe.README` files. Packaged releases copy those files into the installed app's `resources/` folder as `FFMPEG-LICENSE.txt` and `FFMPEG-README.txt`.
+
+For more detail, see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). FFmpeg source and license information is available from the [FFmpeg project](https://ffmpeg.org/) and the [`ffmpeg-static`](https://github.com/eugeneware/ffmpeg-static) package.
+
 ## Credits
 
-This app is based on the Scrcpy Studio desktop shell/design and adapts it into a compression-focused app.
+This app adapts the Scrcpy Studio desktop shell/design into a compression-focused app.
 
-Compression behavior is based on [`k0rucha/8mb-videocompressor`](https://github.com/k0rucha/8mb-videocompressor), a Python/FFmpeg utility for compressing videos to 8MB or less. Compress Studio keeps the useful compression idea but implements it as a batch desktop UI with queue state, thumbnails, configurable output folders, desired-size targets, and background FFmpeg jobs.
+The desired-size compression workflow is inspired by [`k0rucha/8mb-videocompressor`](https://github.com/k0rucha/8mb-videocompressor), a Python/FFmpeg utility for compressing videos to 8MB or less. Compress Studio keeps the useful compression idea but implements it as a batch desktop UI with queue state, thumbnails, configurable output folders, desired-size targets, and background FFmpeg jobs.
 
 FFmpeg is used for video encoding, thumbnail extraction, and metadata probing.
+
+## License
+
+Compress Studio is licensed under GPL-3.0-or-later. See [LICENSE](LICENSE).

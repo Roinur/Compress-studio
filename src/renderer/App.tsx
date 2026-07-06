@@ -36,7 +36,7 @@ function createDemoBridge(): BridgeApi {
     async saveSettings(next) { settings = next; return settings; },
     async chooseInputFiles() { return ['C:\\Demo\\clip-one.mp4', 'C:\\Demo\\screen-recording.mov']; },
     async chooseOutputDir() { return 'C:\\Demo\\Compressed'; },
-    async chooseExecutable() { return 'C:\\Demo\\console.main.exe'; },
+    async chooseExecutable() { return 'C:\\Demo\\ffmpeg.exe'; },
     async enqueueFiles(paths) {
       const now = new Date().toISOString();
       jobs = [

@@ -2,6 +2,7 @@
   "name": "compress-studio",
   "version": "1.0.0",
   "description": "A polished Windows-first batch video compression app.",
+  "license": "GPL-3.0-or-later",
   "main": "dist/main/main/main.js",
   "type": "module",
   "scripts": {
@@ -25,11 +26,32 @@
       "dist/**/*",
       "assets/**/*",
       "node_modules/ffmpeg-static/**/*",
+      "LICENSE",
+      "THIRD_PARTY_NOTICES.md",
+      "README.md",
       "package.json"
     ],
     "asar": true,
     "asarUnpack": [
       "node_modules/ffmpeg-static/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "LICENSE",
+        "to": "LICENSE"
+      },
+      {
+        "from": "THIRD_PARTY_NOTICES.md",
+        "to": "THIRD_PARTY_NOTICES.md"
+      },
+      {
+        "from": "node_modules/ffmpeg-static/ffmpeg.exe.LICENSE",
+        "to": "FFMPEG-LICENSE.txt"
+      },
+      {
+        "from": "node_modules/ffmpeg-static/ffmpeg.exe.README",
+        "to": "FFMPEG-README.txt"
+      }
     ],
     "win": {
       "icon": "assets/icon.ico",
