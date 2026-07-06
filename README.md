@@ -23,6 +23,17 @@ Compress Studio is a Windows-first desktop app for batch video compression. It k
 - Parallel job control and reveal-on-done support.
 - FFmpeg is provided by the `ffmpeg-static` npm dependency, so source builds do not need a system FFmpeg install.
 
+## Install From Source
+
+```powershell
+git clone https://github.com/Roinur/Compress-studio.git
+cd Compress-studio
+npm install
+npm run package
+```
+
+The Windows installer is written to `release/`.
+
 ## Development
 
 ```powershell
