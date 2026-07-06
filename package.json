@@ -27,7 +27,10 @@
       "node_modules/ffmpeg-static/**/*",
       "package.json"
     ],
-    "asar": false,
+    "asar": true,
+    "asarUnpack": [
+      "node_modules/ffmpeg-static/**/*"
+    ],
     "win": {
       "icon": "assets/icon.ico",
       "requestedExecutionLevel": "asInvoker",

@@ -23,6 +23,11 @@ function bundledCompressorPath() {
 
 function bundledFfmpegPath() {
   const executable = process.platform === 'win32' ? 'ffmpeg.exe' : 'ffmpeg';
+  if (app.isPackaged) {
+    const unpackedPath = path.join(path.dirname(app.getAppPath()), 'app.asar.unpacked', 'node_modules', 'ffmpeg-static', executable);
+    if (fs.existsSync(unpackedPath)) return unpackedPath;
+  }
+
   const npmPath = path.join(app.getAppPath(), 'node_modules', 'ffmpeg-static', executable);
   if (fs.existsSync(npmPath)) return npmPath;
 
@@ -78,7 +83,7 @@ function buildOutputPath(inputPath: string, settings: CompressorSettings) {
 }
 
 function buildFfmpegArgs(inputPath: string, settings: CompressorSettings, outputPath: string, quality: number) {
-  const executable = bundledFfmpegPath();
+  const executable = resolveCompressorPath(settings);
   const useNvenc = settings.preferNvidia && hasNvidiaGpu();
   const args = [
     '-hide_banner',
